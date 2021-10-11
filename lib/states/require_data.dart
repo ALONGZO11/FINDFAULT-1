@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:findfault/models/current_model.dart';
 import 'package:findfault/states/show_map.dart';
@@ -18,11 +20,11 @@ class _ReqireDataState extends State<ReqireData> {
   String? brekerChoosed;
   bool loadBreaker = true;
 
-  List<String> typeBreakers = ['SLG', '2PH', '2PHG', '3PH'];
+  List<String> typeBreakers = ['slg', '2ph', '2phg', '3ph'];
 
   String? typeBreaker;
   String? currentMaxStr;
-
+  
   @override
   void initState() {
     // TODO: implement initState
@@ -62,6 +64,7 @@ class _ReqireDataState extends State<ReqireData> {
               behavior: HitTestBehavior.opaque,
               child: Center(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Dropdownbreaker(),
                     DropdownType(),
