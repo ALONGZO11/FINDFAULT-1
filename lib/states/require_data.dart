@@ -1,8 +1,8 @@
-import 'dart:html';
-
+import 'package:adobe_xd/pinned.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:findfault/models/current_model.dart';
 import 'package:findfault/states/show_map.dart';
+import 'package:findfault/uper.dart';
 import 'package:findfault/utility/my_dailo.dart';
 import 'package:findfault/widgets/show_progess.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,7 +24,7 @@ class _ReqireDataState extends State<ReqireData> {
 
   String? typeBreaker;
   String? currentMaxStr;
-  
+
   @override
   void initState() {
     // TODO: implement initState
@@ -54,24 +54,88 @@ class _ReqireDataState extends State<ReqireData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Reqire Data'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Reqire Data'),
+      // ),
       body: loadBreaker
           ? ShowProgess()
           : GestureDetector(
               onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
               behavior: HitTestBehavior.opaque,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Dropdownbreaker(),
-                    DropdownType(),
-                    BuildCurrent(),
-                    Buildcaculate()
-                  ],
-                ),
+              child: Stack(
+                children: <Widget>[
+                  Pinned.fromPins(
+                    Pin(start: 0.0, end: 0.0),
+                    Pin(size: 506.0, start: 0.0),
+                    child: Stack(
+                      children: <Widget>[
+                        Pinned.fromPins(
+                          Pin(size: 218.0, middle: 0.5029),
+                          Pin(size: 93.0, end: 0.0),
+                          child: Stack(
+                            children: <Widget>[
+                              Pinned.fromPins(
+                                Pin(start: 27.0, end: 27.0),
+                                Pin(size: 21.0, end: 0.0),
+                                child: Text(
+                                  'Please input DATA',
+                                  style: TextStyle(
+                                    fontFamily: 'Circular Std Book',
+                                    fontSize: 16,
+                                    color: const Color(0xff797979),
+                                    height: 1.5625,
+                                  ),
+                                  textHeightBehavior: TextHeightBehavior(
+                                      applyHeightToFirstAscent: false),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              Pinned.fromPins(
+                                Pin(start: 0.0, end: 0.0),
+                                Pin(size: 64.0, start: 0.0),
+                                child: Text(
+                                  'Welcome to \nFINDFAULTPROJECT',
+                                  style: TextStyle(
+                                    fontFamily: 'Circular Std Medium',
+                                    fontSize: 24,
+                                    color: const Color(0xff1136d2),
+                                    height: 1.3333333333333333,
+                                  ),
+                                  textHeightBehavior: TextHeightBehavior(
+                                      applyHeightToFirstAscent: false),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Pinned.fromPins(
+                          Pin(start: 0.0, end: 0.0),
+                          Pin(start: 0.0, end: 95.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: const AssetImage('images/logo.png'),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Dropdownbreaker(),
+                        DropdownType(),
+                        BuildCurrent(),
+                        Buildcaculate()
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
     );
@@ -128,7 +192,6 @@ class _ReqireDataState extends State<ReqireData> {
         }
 
         print('###current ใกล้สุด ${nearestModel!.current}');
-
       });
     });
 
@@ -180,7 +243,7 @@ class _ReqireDataState extends State<ReqireData> {
           typeBreaker = value;
         });
       },
-      hint: Text('Choose type Breaker'), // type Fault
+      hint: Text('Type FAULT'), // type Fault
       value: typeBreaker,
       items: typeBreakers
           .map(

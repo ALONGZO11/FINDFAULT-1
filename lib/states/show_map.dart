@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:findfault/models/current_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
